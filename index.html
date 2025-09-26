@@ -7,21 +7,48 @@
 <body>
 
     <script>
-        // function addNumbers(num1, num2) {
-        //     return num1 + num2;
-        // }
+        let firstNumber = 0;
+        let secondNumber = 0;
+        let operator = "";
 
-        // function subtractNumbers(num1, num2) {
-        //     return num1 - num2;
-        // }
+        function addNumbers(num1, num2) {
+            return num1 + num2;
+        }
+
+        function subtractNumbers(num1, num2) {
+            return num1 - num2;
+        }
 
         function multiplyNumbers(num1, num2) {
             return num1 * num2; 
         }
 
+        function divideNumbers(num1, num2) {
+            return num1 / num2;
+        }
+
+        function operate (operator, num1, num2) {
+            switch (operator) {
+                case "+": 
+                    addNumbers(num1, num2);
+                    break;
+                case "-":
+                    subtractNumbers(num1, num2);
+                    break;
+                case "*": 
+                    multiplyNumbers(num1, num2);
+                    break;
+                case "/":
+                    divideNumbers(num1, num2);
+                    break;
+                default:
+                    alert("Cannot be identified. Please try again");
+            }
+        }
+
         let ans1 = parseInt(prompt("Type the first number"));
         let ans2 = parseInt(prompt("Type the second number"));
-        console.log(multiplyNumbers(ans1, ans2));
+        console.log(divideNumbers(ans1, ans2));
         
     </script>
 </body>
