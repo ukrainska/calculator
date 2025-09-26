@@ -32,6 +32,7 @@
         let firstNumber = 0;
         let secondNumber = 0;
         let operator = "";
+        let isSwitched = false;
 
         const numbers = document.querySelector(".numbers");
         const operators = document.querySelector(".operators");
@@ -82,9 +83,19 @@
             }
         }
 
+        function assignNumber(number) {
+            if (isSwitched === false) {
+                firstNumber = (firstNumber === 0) ? number : firstNumber + number;
+            }
+            else if (isSwitched === true){
+                secondNumber = (secondNumber === 0) ? number : secondNumber + number;
+            }
+        }
+
         numbers.addEventListener('click', (event) => {
             const content = event.target.innerText;
             showOnDisplay(content);
+            assignNumber(content);
             console.log(event.target.innerText);
             console.log(firstNumber);
         });
