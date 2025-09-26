@@ -16,7 +16,7 @@
         <button id="clear">Clear</button>
     </div>
 
-    <div class = numbers>
+    <div class="numbers">
         <button id="one">1</button>
         <button id="two">2</button>
         <button id="three">3</button>
@@ -32,6 +32,11 @@
         let firstNumber = 0;
         let secondNumber = 0;
         let operator = "";
+
+        const numbers = document.querySelector(".numbers");
+        const operators = document.querySelector(".operators");
+
+        let display = document.getElementById("display");
 
         function addNumbers(num1, num2) {
             return num1 + num2;
@@ -67,6 +72,22 @@
                     alert("Cannot be identified. Please try again");
             }
         }
+
+        function showOnDisplay (input) {
+            if (display.innerText === "0") {
+                display.innerText = input;
+            }
+            else {
+                display.innerText += input; 
+            }
+        }
+
+        numbers.addEventListener('click', (event) => {
+            const content = event.target.innerText;
+            showOnDisplay(content);
+            console.log(event.target.innerText);
+            console.log(firstNumber);
+        });
 
         // let ans1 = parseInt(prompt("Type the first number"));
         // let ans2 = parseInt(prompt("Type the second number"));
