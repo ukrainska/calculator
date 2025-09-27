@@ -32,8 +32,8 @@
     </div>
 
     <script>
-        let firstNumber = 0;
-        let secondNumber = 0;
+        let firstNumber = "";
+        let secondNumber = "";
         let operator = "";
         let isSwitched = false;
         let isOperatorPressed = false;
@@ -42,6 +42,7 @@
         const operators = document.querySelector(".operators");
         const equal = document.getElementById("equal");
         const clear = document.getElementById("clear");
+        const decimal = document.getElementById("decimal");
 
         let display = document.getElementById("display");
 
@@ -94,12 +95,11 @@
         }
 
         function assignNumber(number) {
-            number = parseInt(number);
             if (!isSwitched) {
-                firstNumber = firstNumber * 10 + number;
+                firstNumber += number;
             }
             else if (isSwitched){
-                secondNumber = secondNumber * 10 + number;
+                secondNumber +=  number;
             }
         }
 
@@ -112,12 +112,12 @@
 
         operators.addEventListener("click", (event) => {
             if (operator && isSwitched) {
-                const result = operate(operator, firstNumber, secondNumber); //9
+                const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
 
                 display.innerHTML = result;
 
-                firstNumber = result;
-                secondNumber = 0;
+                firstNumber = result.toString();
+                secondNumber = "";
             }
             isOperatorPressed = true;
             isSwitched = true;
@@ -127,22 +127,36 @@
         });
         
         equal.addEventListener("click", (event) => {
-            const result = operate(operator, firstNumber, secondNumber);
+            const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
             display.innerHTML = result;
-            firstNumber = result;
-            secondNumber = 0;
+            firstNumber = result.toString();
+            secondNumber = "";
         });
 
         
 
         clear.addEventListener("click", (event) => {
             display.innerHTML = "0";
-            firstNumber = 0;
-            secondNumber = 0;
+            firstNumber = "";
+            secondNumber = "";
             isSwitched = false;
             isOperatorPressed = false;
             operator = "";
         });
+
+        decimal.addEventListener("click", () => {
+            if (isSwitched) {
+                if (!secondNumber.includes(".")) {
+                    secondNumber += (secondNumber === "") ? "0." : ".";
+                    display.innerText = secondNumber;
+                }
+            } else {
+                if(!firstNumber.includes(".")) {
+                    firstNumber += (firstNumber === "") ? "0." : ".";
+                    display.innerText = firstNumber;
+                }
+            }
+        })
     </script>
 </body>
 </html>
