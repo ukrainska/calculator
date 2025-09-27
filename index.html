@@ -18,6 +18,7 @@
     <button id="clear">Clear</button></div>
 
     <div class="numbers">
+        <button id="zero">0</button>
         <button id="one">1</button>
         <button id="two">2</button>
         <button id="three">3</button>
@@ -39,6 +40,7 @@
         const numbers = document.querySelector(".numbers");
         const operators = document.querySelector(".operators");
         const equal = document.getElementById("equal");
+        const clear = document.getElementById("clear");
 
         let display = document.getElementById("display");
 
@@ -114,7 +116,13 @@
             isOperatorPressed = false;
             const result = operate(operator, parseInt(firstNumber), parseInt(secondNumber));
             display.innerHTML = result;
-        })
+        });
+        
+        clear.addEventListener("click", (event) => {
+            display.innerHTML = "0";
+            firstNumber = 0;
+            secondNumber = 0;
+        });
     </script>
 </body>
 </html>
