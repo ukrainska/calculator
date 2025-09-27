@@ -16,6 +16,7 @@
 
     <button id="equal">=</button>
     <button id="clear">Clear</button></div>
+    <button id="decimal">.</button>
 
     <div class="numbers">
         <button id="zero">0</button>
@@ -57,7 +58,12 @@
         }
 
         function divideNumbers(num1, num2) {
-            return num1 / num2;
+            if (num2 === 0) {
+                alert("Ah-ah-ah! Division by zero is not allowed!");
+            return 0;
+            }
+            const result = num1 / num2;
+            return result.toFixed(1);
         }
 
         function operate (operator, num1, num2) {
@@ -70,6 +76,8 @@
                     return multiplyNumbers(num1, num2);
                 case "/":
                     return divideNumbers(num1, num2);
+                case "=":
+                    alert("Try to start with numbers");
                 default:
                     alert("Cannot be identified. Please try again");
             }
@@ -86,42 +94,54 @@
         }
 
         function assignNumber(number) {
-            if (isSwitched === false) {
-                firstNumber = (firstNumber === 0) ? number : firstNumber + number;
+            number = parseInt(number);
+            if (!isSwitched) {
+                firstNumber = firstNumber * 10 + number;
             }
-            else if (isSwitched === true){
-                secondNumber = (secondNumber === 0) ? number : secondNumber + number;
+            else if (isSwitched){
+                secondNumber = secondNumber * 10 + number;
             }
         }
+
 
         numbers.addEventListener("click", (event) => {
             const content = event.target.innerText;
             showOnDisplay(content);
             assignNumber(content);
-            console.log(event.target.innerText);
-            console.log(firstNumber);
-            console.log(secondNumber);
         });
 
         operators.addEventListener("click", (event) => {
+            if (operator && isSwitched) {
+                const result = operate(operator, firstNumber, secondNumber); //9
+
+                display.innerHTML = result;
+
+                firstNumber = result;
+                secondNumber = 0;
+            }
             isOperatorPressed = true;
             isSwitched = true;
             operator = event.target.innerText;
+
             display.innerText += ` ${operator}  `;
         });
         
         equal.addEventListener("click", (event) => {
-            display.innerHTML = "";
-            isSwitched = false;
-            isOperatorPressed = false;
-            const result = operate(operator, parseInt(firstNumber), parseInt(secondNumber));
+            const result = operate(operator, firstNumber, secondNumber);
             display.innerHTML = result;
+            firstNumber = result;
+            secondNumber = 0;
         });
+
         
+
         clear.addEventListener("click", (event) => {
             display.innerHTML = "0";
             firstNumber = 0;
             secondNumber = 0;
+            isSwitched = false;
+            isOperatorPressed = false;
+            operator = "";
         });
     </script>
 </body>
