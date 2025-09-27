@@ -34,10 +34,11 @@
         let secondNumber = 0;
         let operator = "";
         let isSwitched = false;
-        let isPressed = false;
+        let isOperatorPressed = false;
 
         const numbers = document.querySelector(".numbers");
         const operators = document.querySelector(".operators");
+        const equal = document.getElementById("equal");
 
         let display = document.getElementById("display");
 
@@ -60,30 +61,25 @@
         function operate (operator, num1, num2) {
             switch (operator) {
                 case "+": 
-                    addNumbers(num1, num2);
-                    break;
+                    return addNumbers(num1, num2);
                 case "-":
-                    subtractNumbers(num1, num2);
-                    break;
+                    return subtractNumbers(num1, num2);
                 case "*": 
-                    multiplyNumbers(num1, num2);
-                    break;
+                    return multiplyNumbers(num1, num2);
                 case "/":
-                    divideNumbers(num1, num2);
-                    break;
+                    return divideNumbers(num1, num2);
                 default:
                     alert("Cannot be identified. Please try again");
             }
         }
 
         function showOnDisplay (input) {
-            if (display.innerText === "0" || isPressed) {
+            if (display.innerText === "0" || isOperatorPressed) {
                 display.innerText = input;
-                isPressed = false;
+                isOperatorPressed = false;
             }
             else {
-                display.innerText = (isPressed) ? 
-                    " " + display.innerText + input: display.innerText + input; 
+                display.innerText += input; 
             }
         }
 
@@ -106,16 +102,19 @@
         });
 
         operators.addEventListener("click", (event) => {
-            isPressed = true;
+            isOperatorPressed = true;
             isSwitched = true;
-            const operator = event.target.innerText;
+            operator = event.target.innerText;
             display.innerText += ` ${operator}  `;
         });
-
-        // let ans1 = parseInt(prompt("Type the first number"));
-        // let ans2 = parseInt(prompt("Type the second number"));
-        // console.log(divideNumbers(ans1, ans2));
         
+        equal.addEventListener("click", (event) => {
+            display.innerHTML = "";
+            isSwitched = false;
+            isOperatorPressed = false;
+            const result = operate(operator, parseInt(firstNumber), parseInt(secondNumber));
+            display.innerHTML = result;
+        })
     </script>
 </body>
 </html>
