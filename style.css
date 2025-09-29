@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    
+    font-size: 20px;
 }
 
 .calculator { 
@@ -16,6 +16,12 @@
     border-radius: 10px;
 }
 
+button {
+    border-radius: 10px;
+    width: 60px;
+    height: 40px;
+}
+
 #display {
     display: flex;
     justify-content: flex-end;
@@ -23,8 +29,43 @@
     flex-wrap: wrap;
     background-color:#E3C1D0;
     border-radius: 10px;
-    width: 90%;
+    width: 80%;
     height: 50px;
     padding-inline: 10px;
     margin-block: 25px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 90%;
+    padding-inline: 50px;
+}
+
+.top-part {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 30px;
+    border: blue 3px solid;
+}
+
+.operators {
+    display: flex;
+    justify-content: space-around;
+}
+
+.additional-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.pink-buttons
+{
+    background-color: #E3C1D0;
+}
+
+.green-buttons {
+    background-color: #D0E3C1;
 }
