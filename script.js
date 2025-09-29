@@ -9,6 +9,7 @@ const operators = document.querySelector(".operators");
 const equal = document.getElementById("equal");
 const clear = document.getElementById("clear");
 const decimal = document.getElementById("decimal");
+const deleteB = document.getElementById("deleteB");
 
 let display = document.getElementById("display");
 
@@ -31,12 +32,13 @@ function divideNumbers(num1, num2) {
     }
     const result = num1 / num2;
 
-    if (Number.isInteger) {
+    if (Number.isInteger(result)) {
         return result;
     }
 
     return Math.round(result * 10) / 10;
 }
+
 
 function operate (operator, num1, num2) {
     switch (operator) {
@@ -94,7 +96,7 @@ operators.addEventListener("click", (event) => {
     isSwitched = true;
     operator = event.target.innerText;
 
-    display.innerText += ` ${operator}  `;
+    display.innerText = firstNumber + ` ${operator}  `;
 });
 
 equal.addEventListener("click", (event) => {
@@ -129,4 +131,16 @@ decimal.addEventListener("click", () => {
             display.innerText = firstNumber;
         }
     }
+})
+
+deleteB.addEventListener("click", () => {
+    if (!isSwitched) {
+        firstNumber = firstNumber.slice(0, -1);
+    } else if (isSwitched) {
+        secondNumber = secondNumber.slice(0, -1);
+    } else if (isSwitched && secondNumber === "") {
+        operator = "";
+        isSwitched = false;
+    }
+    display.innerText = firstNumber + (operator ? ` ${operator} ` : "") + secondNumber;
 })
