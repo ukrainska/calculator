@@ -29,8 +29,13 @@ function divideNumbers(num1, num2) {
         alert("Ah-ah-ah! Division by zero is not allowed!");
         return 0;
     }
-    const result = parseFloat(num1 / num2);
-    return result.toFixed(1);
+    const result = num1 / num2;
+
+    if (Number.isInteger) {
+        return result;
+    }
+
+    return Math.round(result * 10) / 10;
 }
 
 function operate (operator, num1, num2) {
