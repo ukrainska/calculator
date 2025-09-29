@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+.calculator { 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 800px;
+    background-color: #C1D0E3;
+    border: red 2px solid;
+    border-radius: 10px;
+}
+
+#display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color:#E3C1D0;
+    border-radius: 10px;
+    width: 90%;
+    height: 50px;
+    padding-inline: 10px;
+    margin-block: 25px;
+}
